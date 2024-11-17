@@ -110,7 +110,7 @@ func RegisterAuthRoutes(router *gin.RouterGroup, db *sqlx.DB) {
 			return
 		}
 
-		c.SetCookie("token", token, 24*60*60, "/", "auth.dawn.rest", true, false)
+		c.SetCookie("token", token, 24*60*60, "/", "", true, false)
 
 		c.Status(204)
 	})
