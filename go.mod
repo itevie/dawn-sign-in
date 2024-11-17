@@ -1,6 +1,6 @@
 module dawn.rest/dawn-sign-in
 
-go 1.23.2
+go 1.22.7
 
 require github.com/gin-gonic/gin v1.10.0
 
