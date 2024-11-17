@@ -48,5 +48,5 @@ func main() {
 		routes.RegisterAuthRoutes(api, db)
 	}
 
-	router.Run(":3000")
+	router.Run(":3004")
 }
