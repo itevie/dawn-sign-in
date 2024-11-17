@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	"dawn.rest/dawn-sign-in/routes"
 	"github.com/gin-gonic/gin"
@@ -51,7 +52,13 @@ func main() {
 
 	router.NoRoute(func(c *gin.Context) {
 		if c.Request.Method == "GET" {
-			url := fmt.Sprintf("/home/isabella/Documents/projects/go/dawn-sign-in/client/build%s", c.Request.URL)
+			url := fmt.Sprintf("./client/build%s", c.Request.URL)
+
+			if strings.Contains(url, "..") {
+				c.Status(http.StatusUnauthorized)
+				c.Abort()
+				return
+			}
 
 			if info, err := os.Stat(url); err == nil && !info.IsDir() {
 				c.File(url)
@@ -62,7 +69,7 @@ func main() {
 			c.Header("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate")
 			c.Header("Pragma", "no-cache")
 			c.Header("Expires", "0")
-			c.File("/home/isabella/Documents/projects/go/dawn-sign-in/client/build/index.html")
+			c.File("./client/build/index.html")
 			c.Status(http.StatusOK)
 			c.Abort()
 			return
