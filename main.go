@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"dawn.rest/dawn-sign-in/routes"
@@ -47,6 +48,26 @@ func main() {
 	{
 		routes.RegisterAuthRoutes(api, db)
 	}
+
+	router.NoRoute(func(c *gin.Context) {
+		if c.Request.Method == "GET" {
+			url := fmt.Sprintf("/home/isabella/Documents/projects/go/dawn-sign-in/client/build%s", c.Request.URL)
+
+			if info, err := os.Stat(url); err == nil && !info.IsDir() {
+				c.File(url)
+				c.Abort()
+				return
+			}
+
+			c.Header("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate")
+			c.Header("Pragma", "no-cache")
+			c.Header("Expires", "0")
+			c.File("/home/isabella/Documents/projects/go/dawn-sign-in/client/build/index.html")
+			c.Status(http.StatusOK)
+			c.Abort()
+			return
+		}
+	})
 
 	router.Run(":3004")
 }
