@@ -52,7 +52,7 @@ func main() {
 
 	router.NoRoute(func(c *gin.Context) {
 		if c.Request.Method == "GET" {
-			url := fmt.Sprintf("./client/build%s", c.Request.URL)
+			url := fmt.Sprintf("./out%s", c.Request.URL)
 
 			if strings.Contains(url, "..") {
 				c.Status(http.StatusUnauthorized)
@@ -69,7 +69,7 @@ func main() {
 			c.Header("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate")
 			c.Header("Pragma", "no-cache")
 			c.Header("Expires", "0")
-			c.File("./client/build/index.html")
+			c.File("./out/index.html")
 			c.Status(http.StatusOK)
 			c.Abort()
 			return
