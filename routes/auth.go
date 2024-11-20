@@ -3,6 +3,7 @@ package routes
 import (
 	"fmt"
 	"net/http"
+	"net/mail"
 	"time"
 
 	"dawn.rest/dawn-sign-in/models"
@@ -22,6 +23,14 @@ func RegisterAuthRoutes(router *gin.RouterGroup, db *sqlx.DB) {
 		if err := c.ShouldBindJSON(&body); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"message": fmt.Sprintf("Invalid body: %s", err.Error()),
+			})
+			c.Abort()
+			return
+		}
+
+		if _, err := mail.ParseAddress(body.Email); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": "Invalid email address",
 			})
 			c.Abort()
 			return

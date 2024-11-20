@@ -6,6 +6,7 @@ import AlertManager from "./dawn-ui/components/AlertManager";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Authorize from "./pages/Authorize";
+import Register from "./pages/Register";
 
 loadTheme();
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/oauth",

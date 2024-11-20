@@ -7,7 +7,7 @@ import Navbar from "../dawn-ui/components/Navbar";
 import Page from "../dawn-ui/components/Page";
 import Row from "../dawn-ui/components/Row";
 
-export const baseUrl = "";
+export const baseUrl = "https://auth.dawn.rest";
 
 export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -48,31 +48,33 @@ export default function Login() {
       </Navbar>
       <Page>
         <Container title="Login to dawn.rest">
-          <label>
-            Login to your dawn.rest account.
-            <br />
-            Note: This feature is just a concept, it isn't meant to be taken
-            seriously.
-          </label>
-          <table>
-            <tbody>
-              <tr>
-                <td>Email</td>
-                <td>
-                  <input ref={emailRef} />
-                </td>
-              </tr>
-              <tr>
-                <td>Password</td>
-                <td>
-                  <input ref={passwordRef} type="password" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <Button big onClick={startLogin}>
-            Login
-          </Button>
+          <div>
+            <label>
+              Login to your dawn.rest account.
+              <br />
+              Note: This feature is just a concept, it isn't meant to be taken
+              seriously.
+            </label>
+            <table style={{ margin: "10px", borderSpacing: "10px" }}>
+              <tbody>
+                <tr>
+                  <td>Email</td>
+                  <td>
+                    <input ref={emailRef} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Password</td>
+                  <td>
+                    <input ref={passwordRef} type="password" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <Button big onClick={startLogin}>
+              Login
+            </Button>
+          </div>
         </Container>
       </Page>
     </>
