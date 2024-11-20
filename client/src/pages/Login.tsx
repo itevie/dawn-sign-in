@@ -6,6 +6,7 @@ import { showInfoAlert } from "../dawn-ui/components/AlertManager";
 import Navbar from "../dawn-ui/components/Navbar";
 import Page from "../dawn-ui/components/Page";
 import Row from "../dawn-ui/components/Row";
+import Link from "../dawn-ui/components/Link";
 
 export const baseUrl = "https://auth.dawn.rest";
 
@@ -74,6 +75,9 @@ export default function Login() {
             <Button big onClick={startLogin}>
               Login
             </Button>
+            <Link href={`${baseUrl}/register?cb=${window.location.href}`}>
+              No Account?
+            </Link>
           </div>
         </Container>
       </Page>
